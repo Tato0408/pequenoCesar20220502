@@ -4,8 +4,6 @@
 //Paso 1: Creo un array de metodos
 
 const pizzasController = {};
-
-import pizza from "../models/pizza.js";
 //Importo el esquema que voya  utilizar
 
 import pizzasModel from "../models/pizza.js";
