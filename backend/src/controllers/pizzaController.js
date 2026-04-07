@@ -1,12 +1,12 @@
 //Aqui en el controlador vamos a definir las funciones que ejecutaran
 //los metodos: get(), pos(), put() y delete()
-
+//Este CRUD es un CRUD sin validaciones, solamente es de prueba
 //Paso 1: Creo un array de metodos
 
-const pizzasController = {};
-//Importo el esquema que voya  utilizar
-
 import pizzasModel from "../models/pizza.js";
+const pizzasController = {};
+//Importo el esquema que voy a  utilizar
+
 
 //SELECT
 pizzasController.getPizzas = async (req, res) => {

@@ -1,3 +1,4 @@
+//En este archivo definimos los metodos que tendrá cada endpoint
 import express from 'express';
 import pizzasController from "../controllers/pizzaController.js"
 //Router() es el que ayuda a colocar los métodos 
