@@ -21,7 +21,6 @@ reviewsController.createReview = async (req, res)=>{
             idEmployee,
             idPizza
         } = req.body;
-
         comment = comment?.trim();
         
 
