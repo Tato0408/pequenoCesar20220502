@@ -1,11 +1,11 @@
 import customerModel from '../models/customers.js'
-import nodemailer from 'nodemailer'
+import * as nodemailer from 'nodemailer'
 import crypto from 'crypto'
 import jsonwebtoken from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import config from '../config.js'
-registerCustomerController = {};
+import {config} from "../../config.js"
+const registerCustomerController = {};
 
 registerCustomerController.insertCustomer = async (req,res) => {
     try {
@@ -32,7 +32,7 @@ registerCustomerController.insertCustomer = async (req,res) => {
         return res.status(400).json({message: "name must be real"})
     }
     //Validar que el correo no exista
-    const existCustomer = await customerModel.findOne(email)
+    const existCustomer = await customerModel.findOne({ email: email})
     if(existCustomer){
         return res.status(400).json({message: "Email already exists"})
     }
@@ -64,11 +64,11 @@ registerCustomerController.insertCustomer = async (req,res) => {
     );
 
     //guardamos el token en una cookie
-    res.cookie("resgistrationCookie",token,{maxAge: 15*60*1000})
+    res.cookie("registrationCookie",token,{maxAge: 15*60*1000})
 
     //Enviar correo electrónico
     //1 Transporter -> ¿Qui en lo envía?
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
             user:config.email.user_email,
@@ -81,7 +81,7 @@ registerCustomerController.insertCustomer = async (req,res) => {
         from: config.email.user_email,
         to: email,
         subject: "Verificación de cuenta",
-        text: "Código de verificación: " + randomCode + "expira en 15 minutos"
+        text: "Código de verificación: " + randomCode + " expira en 15 minutos"
     };
 
     // Enviar el correo electrónico
@@ -103,12 +103,13 @@ registerCustomerController.insertCustomer = async (req,res) => {
 
 registerCustomerController.verifyCode = async(req,res) => {
     try {
+        console.log("Cookies", req.cookies);
         const {verificationCodeRequest} = req.body;
         //Extraer todo los datos del token
         const token = req.cookies.registrationCookie;
         const decode = jsonwebtoken.verify(token, config.JWT.secret);
         const {
-            randomeCode: storedCode,
+            randomCode: storedCode,
             name,
             lastName,
             email,
@@ -142,3 +143,5 @@ registerCustomerController.verifyCode = async(req,res) => {
         return res.status(500).json({message: "Internal Server Error"});
     }
 }
+
+export default registerCustomerController;
