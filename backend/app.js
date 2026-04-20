@@ -7,10 +7,17 @@ import reviewsRoutes from "./src/routes/reviews.js"
 import customerRoutes from "./src/routes/customer.js"
 import registerCustomerRoutes from "./src/routes/registerCustomer.js"
 import registerEmployeeRoutes from "./src/routes/registerEmployee.js"
+import loginCustomerRoutes from "./src/routes/loginCustomer.js"
+import logoutRoutes from './src/routes/logout.js';
+import cors from 'cors';
+
 //Crea una constante que es igual a:
 // La libreria express 
 const app = express();
-
+app.use(cors({
+    origin:["http://localhost:5173", "http://http:5174"],
+    credentials:true
+}))
 //Para que la api acepte JSON
 app.use(express.json())
 app.use(cookieParser())
@@ -24,7 +31,8 @@ app.use("/api/reviews", reviewsRoutes)
 app.use("/api/customer", customerRoutes)
 app.use("/api/registerCustomer", registerCustomerRoutes)
 app.use("/api/registerEmployee", registerEmployeeRoutes)
-
+app.use("/api/loginCustomer", loginCustomerRoutes)
+app.use("/api/logout", logoutRoutes)
 //Exportamos la constante
 export default app;
 
