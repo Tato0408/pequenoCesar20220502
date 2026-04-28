@@ -9,6 +9,7 @@ import registerCustomerRoutes from "./src/routes/registerCustomer.js"
 import registerEmployeeRoutes from "./src/routes/registerEmployee.js"
 import loginCustomerRoutes from "./src/routes/loginCustomer.js"
 import logoutRoutes from './src/routes/logout.js';
+import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
 import cors from 'cors';
 
 //Crea una constante que es igual a:
@@ -27,12 +28,15 @@ app.use("/api/pizzas", pizzaRoutes)
 app.use("/api/branches", branchesRoutes)
 //1.- Endpoint de empleados, posteriormente crearemos el modelo
 app.use("/api/employee", employeesRoutes)
-app.use("/api/reviews", reviewsRoutes)
-app.use("/api/customer", customerRoutes)
-app.use("/api/registerCustomer", registerCustomerRoutes)
 app.use("/api/registerEmployee", registerEmployeeRoutes)
+
 app.use("/api/loginCustomer", loginCustomerRoutes)
+app.use("/api/registerCustomer", registerCustomerRoutes)
+app.use("/api/customer", customerRoutes)
 app.use("/api/logout", logoutRoutes)
+app.use("/api/reviews", reviewsRoutes)
+
+app.use("/api/recoveryPassword", recoveryPasswordRoutes)
 //Exportamos la constante
 export default app;
 
