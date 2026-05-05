@@ -1,5 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser'
+import cors from 'cors';
 import pizzaRoutes from "./src/routes/pizza.js"
 import branchesRoutes from "./src/routes/branches.js"
 import employeesRoutes from "./src/routes/employees.js"
@@ -10,7 +11,6 @@ import registerEmployeeRoutes from "./src/routes/registerEmployee.js"
 import loginCustomerRoutes from "./src/routes/loginCustomer.js"
 import logoutRoutes from './src/routes/logout.js';
 import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
-import cors from 'cors';
 
 //Crea una constante que es igual a:
 // La libreria express 
