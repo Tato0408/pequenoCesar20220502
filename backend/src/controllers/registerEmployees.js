@@ -44,7 +44,7 @@ registerEmployeeController.insertEmployee = async (req,res) => {
 
     const existEmployee = await employeeModel.findOne({DUI})
     const existEmployeeEmail = await employeeModel.findOne({email})
-    if(existEmployee){
+    if(existEmployee || existEmployeeEmail){
         return res.status(400).json({message: "Employee with this DUI already exists"})
     }
     if(existEmployeeEmail){

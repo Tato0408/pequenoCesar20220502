@@ -16,7 +16,7 @@ import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
 // La libreria express 
 const app = express();
 app.use(cors({
-    origin:["http://localhost:5173", "http://http:5174"],
+    origin:["http://localhost:5173", "http://localhost:5174"],
     credentials:true
 }))
 //Para que la api acepte JSON
