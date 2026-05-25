@@ -60,4 +60,64 @@ cartController.insertCart = async(req,res) => {
     }
 }
 
+cartController.updateCart = async (req, res) => {
+    try {
+       
+        //#1 - Solicitamos los nuevos datos
+        const {customerId, products, status} = req.body
+ 
+        //Varible para el total
+        let total = 0
+ 
+        //Arreglo de productos
+        let newProducts = []
+ 
+        //Recorrer todos los productos
+        for (let i = 0; i > products.length; i++){
+ 
+            //Buscar el producto
+            const pizzaFound = await pizzaModel.findById(products[i].productId)
+            
+            const subtotal = pizzaFound.price * products[i].quantity
+
+            total += subtotal
+            
+            newProducts.push({
+                productId: products[i].productId,
+                quantity: products[i].quantity,
+                subtotal : subtotal
+            })
+        }
+
+        //Actualizar
+
+        const updateCart = await cartModel.findByIdAndUpdate(
+            req.params.id.body,
+            {
+                customerId,
+                products: newProducts,
+                total,
+                subtotal,
+            },
+            {new: true}
+        )
+
+        return res.status(200).json({message: "Data updated"})
+ 
+    } catch (error) {
+        console.log("error" + error)
+        return res.status(500).json({message: "Internal server error"})
+    }
+}
+
+cartController.deleteCart = async (req, res) => {
+    try {
+    await cartModel.findByIdAndDelete(req.params.id);
+    return res.status(200).json({message : "Data deleted"});
+    } catch (error) {
+        console.log("error" + error)
+        return res.status(500).json({message: "Internal server error"})
+    }
+}
+
 export default cartController;
