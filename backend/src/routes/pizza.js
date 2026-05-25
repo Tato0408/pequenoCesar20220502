@@ -10,7 +10,22 @@ router.route("/")
 .get(pizzasController.getPizzas)
 .post(pizzasController.insertPizza)
 
+router.route("/search")
+.post(pizzasController.searchByName)
+
+router.route("/count")
+.get(pizzasController.countPizzas)
+
+router.route("/price")
+.post(pizzasController.getPizzasByPriceRange)
+
+router.route("/low-stock")
+.post(pizzasController.getLowStock)
+
+
+
 router.route("/:id")
 .put(pizzasController.updatePizzas)
 .delete(pizzasController.deletePizzas)
+.get(pizzasController.getPizzaById)
 export default router
