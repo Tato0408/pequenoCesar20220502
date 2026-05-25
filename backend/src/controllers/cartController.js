@@ -7,7 +7,7 @@ cartController.getCart = async(req,res) => {
     try {
         const response = await cartModel.find()
         .populate('customerId', "name email -customerId")
-        .populate('productId', "name price -productId");
+        .populate('products.productId', "name price -productId");
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({message: error.message});
