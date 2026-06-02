@@ -6,8 +6,8 @@ const cartController = {}
 cartController.getCart = async(req,res) => {
     try {
         const response = await cartModel.find()
-        .populate('customerId', "name email -customerId")
-        .populate('products.productId', "name price -productId");
+        .populate('customerId', "name email -_id")
+        .populate('products.productId', "name price -_id");
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -73,7 +73,7 @@ cartController.updateCart = async (req, res) => {
         let newProducts = []
  
         //Recorrer todos los productos
-        for (let i = 0; i > products.length; i++){
+        for (let i = 0; i < products.length; i++){
  
             //Buscar el producto
             const pizzaFound = await pizzaModel.findById(products[i].productId)
@@ -92,12 +92,12 @@ cartController.updateCart = async (req, res) => {
         //Actualizar
 
         const updateCart = await cartModel.findByIdAndUpdate(
-            req.params.id.body,
+            req.params.id,
             {
                 customerId,
                 products: newProducts,
                 total,
-                subtotal,
+                status,
             },
             {new: true}
         )

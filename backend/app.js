@@ -13,6 +13,8 @@ import logoutRoutes from './src/routes/logout.js';
 import recoveryPasswordRoutes from './src/routes/recoveryPassword.js';
 import providerRoutes from './src/routes/providers.js';
 import cartRoutes from './src/routes/cart.js'
+import wompiRoutes from './src/routes/wompi.js'
+import deliveriesRoutes from './src/routes/deliveries.js'
 //Crea una constante que es igual a:
 // La libreria express 
 const app = express();
@@ -39,6 +41,8 @@ app.use("/api/reviews", reviewsRoutes)
 app.use("/api/providers", providerRoutes)
 app.use("/api/recoveryPassword", recoveryPasswordRoutes)
 app.use("/api/cart", cartRoutes)
+app.use("/api/wompi", wompiRoutes)
+app.use("/api/deliveries", deliveriesRoutes)
 //Exportamos la constante
 export default app;
 

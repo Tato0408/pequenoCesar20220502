@@ -38,7 +38,7 @@ pizzasController.updatePizzas = async(req,res) => {
     //#1- Pedir todos los datos
     const {name, description, price, stock } = req.body;
     //#2- Actualizo todos los datos
-    await pizzasModel.findByIdAndUpdate(res.params.id, 
+    await pizzasModel.findByIdAndUpdate(req.params.id, 
         {name, 
         description, 
         price, 

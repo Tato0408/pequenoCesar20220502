@@ -8,7 +8,7 @@
     -status
 */
 
-import mongoose, { Schema, model, trusted } from 'mongoose'
+import mongoose, { Schema, model} from 'mongoose'
 
 const cartSchema = new Schema({
     customerId: {
@@ -21,7 +21,7 @@ const cartSchema = new Schema({
             productId: {
                 type: mongoose.Types.ObjectId,
                 ref: 'pizzas',
-                required: trusted
+            
             },
             quantity: {type: Number},
             subtotal: {type: Number}
