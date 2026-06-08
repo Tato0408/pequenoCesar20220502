@@ -1,5 +1,3 @@
-//#1- Creo un array de funciones vacio
-
 const branchesController = {};
 
 //#2 importo el Schema de la colección que voy a ocupar

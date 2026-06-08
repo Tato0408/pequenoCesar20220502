@@ -90,17 +90,14 @@ cartController.updateCart = async (req, res) => {
         }
 
         //Actualizar
-
-        const updateCart = await cartModel.findByIdAndUpdate(
-            req.params.id,
-            {
-                customerId,
+        const payload = {
+            customerId,
                 products: newProducts,
                 total,
                 status,
-            },
-            {new: true}
-        )
+        }
+
+        const updateCart = await cartModel.findByIdAndUpdate(req.params.id,payload,{new: true})
 
         return res.status(200).json({message: "Data updated"})
  
