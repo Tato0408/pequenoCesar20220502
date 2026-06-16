@@ -8,7 +8,7 @@ const router = express.Router();
 router.route("/")
 .get(customerController.getCustomer)
 
-router.route("/id")
+router.route("/:id")
 .delete(customerController.deleteCustomer)
 .put(customerController.updateCustomer)
 

@@ -1,5 +1,5 @@
 import customerModel from '../models/customers.js'
-
+import bcrypt from 'bcrypt'
 const customerController = {};
 
 customerController.getCustomer = async(req,res) => {
@@ -35,15 +35,17 @@ customerController.updateCustomer = async(req,res)=>{
         if(name .length < 3 || name.length > 20){
         return res.status(400).json({message: "name must be real"})
     }
-
-    const customerUpdate = await customerModel.findByIdAndUpdate(req.params.id, {
+    const hashedPass = await bcrypt.hash(password, 10)
+    const payload = {
         name, 
         lastName,
         email,
-        password,
+        password: hashedPass,
         birthDate,
         isVerified
-    }, {new: true})
+    }
+    const customerUpdate = await customerModel.findByIdAndUpdate(req.params.id, payload, {new: true})
+    
     
     if(!customerUpdate) return res.status(404).json({message: "Customer not found"})
     return res.status(200).json({message: "Customer updated successfully"})

@@ -15,6 +15,9 @@ import providerRoutes from './src/routes/providers.js';
 import cartRoutes from './src/routes/cart.js'
 import wompiRoutes from './src/routes/wompi.js'
 import deliveriesRoutes from './src/routes/deliveries.js'
+import adminRoutes from './src/routes/adminRoutes.js'
+import loginAdminRoutes from './src/routes/loginAdminRoutes.js'
+import {validateAuthCookie} from './src/middlewares/authMiddleware.js'  
 //Crea una constante que es igual a:
 // La libreria express 
 const app = express();
@@ -30,7 +33,7 @@ app.use(cookieParser())
 app.use("/api/pizzas", pizzaRoutes)
 app.use("/api/branches", branchesRoutes)
 //1.- Endpoint de empleados, posteriormente crearemos el modelo
-app.use("/api/employee", employeesRoutes)
+app.use("/api/employee",validateAuthCookie(["admin", "customer"]), employeesRoutes)
 app.use("/api/registerEmployee", registerEmployeeRoutes)
 
 app.use("/api/loginCustomer", loginCustomerRoutes)
@@ -43,6 +46,8 @@ app.use("/api/recoveryPassword", recoveryPasswordRoutes)
 app.use("/api/cart", cartRoutes)
 app.use("/api/wompi", wompiRoutes)
 app.use("/api/deliveries", deliveriesRoutes)
+app.use("/api/admin", adminRoutes)
+app.use("/api/loginAdmin", loginAdminRoutes)
 //Exportamos la constante
 export default app;
 

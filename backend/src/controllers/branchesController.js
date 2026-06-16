@@ -1,3 +1,5 @@
+//#1- Creo un array de funciones vacio
+
 const branchesController = {};
 
 //#2 importo el Schema de la colección que voy a ocupar
@@ -10,7 +12,7 @@ branchesController.getBranches = async (req,res) =>{
     res.json(branches);
 }
 
-//INSEERT
+//INSERT
 
 branchesController.insertBranches = async (req,res) =>{
     //#1 Solicito los datos a guardar
