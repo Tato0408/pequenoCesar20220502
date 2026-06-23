@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-
-mongoose.connect("mongodb://localhost:27017/pequenocesarDB")
+import {config} from './config.js'
+mongoose.connect(config.mongodb.url)
 
 //Comprobar que todo funcione
 
