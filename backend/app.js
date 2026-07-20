@@ -18,6 +18,7 @@ import deliveriesRoutes from './src/routes/deliveries.js'
 import adminRoutes from './src/routes/adminRoutes.js'
 import loginAdminRoutes from './src/routes/loginAdminRoutes.js'
 import {validateAuthCookie} from './src/middlewares/authMiddleware.js'  
+import limiter from './src/middlewares/limiter.js'
 //Crea una constante que es igual a:
 // La libreria express 
 const app = express();
@@ -28,6 +29,7 @@ app.use(cors({
 //Para que la api acepte JSON
 app.use(express.json())
 app.use(cookieParser())
+app.use(limiter)
 
 //Endpoint de pizzas
 app.use("/api/pizzas", pizzaRoutes)
