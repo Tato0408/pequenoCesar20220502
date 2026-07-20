@@ -19,6 +19,8 @@ import adminRoutes from './src/routes/adminRoutes.js'
 import loginAdminRoutes from './src/routes/loginAdminRoutes.js'
 import {validateAuthCookie} from './src/middlewares/authMiddleware.js'  
 import limiter from './src/middlewares/limiter.js'
+import swaggerUi from 'swagger-ui-express'
+import swaggerDocument from './src/utils/DocumentaciónPizzasjson.json ' with{type: "json"}  
 //Crea una constante que es igual a:
 // La libreria express 
 const app = express();
@@ -50,6 +52,7 @@ app.use("/api/wompi", wompiRoutes)
 app.use("/api/deliveries", deliveriesRoutes)
 app.use("/api/admin", adminRoutes)
 app.use("/api/loginAdmin", loginAdminRoutes)
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 //Exportamos la constante
 export default app;
 
